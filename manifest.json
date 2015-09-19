@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+
+  "name": "VUid",
+  "description": "Gettin' uid or vid from Youku.",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "static/power.png",
+    "default_popup": "popup.html"
+  },
+  // "background":{
+  //       "persistent": false,
+  //       "scripts":["/static/background.js"]
+  //   },
+  // "background_page":"background.html",
+  "content_scripts": [
+    {
+      "matches":["*://*/*"],
+      "js": ["/static/jquery.min.js","/static/content_script.js"]
+    }
+  ],
+  "permissions": [ "tabs","activeTab" ]
+}
+
+
