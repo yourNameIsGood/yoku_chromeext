@@ -36,6 +36,30 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
 	      	str+="<a href=\""+http+"/interact/app/get/timeLinePlugin?data={%22platform%22:10,%22platform_type%22:102,%22device%22:1,%22Sc%22:1,%22vid%22:%22"+d.encode_id+"%22,%22showId%22:0,%22card_width%22:320}&callback=jsonp1"+"\" target=\"_blank\">timelinePlugin接口</a><br>";
       }
       $(".video-list p").append(str);
+      
+      //添加常用uid：    //九位数的id在经历encodeId时会出错
+      var user_list = [
+                  {'list_name':'海川','num_id':'464158176',"encode_id":'UMTg1NjYzMjcwNA=='},
+                  {'list_name':'seiitsu720','num_id':'121998474',"encode_id":'XODI4OTMwMjA4'},
+                  {'list_name':'音画魔方','num_id':'5590364',"encode_id":'UMjIzNjE0NTY='},
+                  {'list_name':'yiteng185','num_id':'5994029',"encode_id":'UMjM5NzYxMTY='},
+                  {'list_name':'我','num_id':'2469925',"encode_id":'XODI4OTY5MDQ4'},
+                  {'list_name':'西湖的水','num_id':'780801077',"encode_id":'UMzEyMzIwNDMwOA=='},
+                  {'list_name':'随机生成用户名','num_id':'729603250',"encode_id":'UMjM5NzYxMTY='},
+      ];
+
+      var http = "http://hudong.pl.youku.com";
+      var str = "<br><br>";
+      for(var i in user_list){
+            var d = user_list[i];
+                  str+="<span class=\"list-name\">"+d.list_name+": </span>&nbsp;";
+                  str+="<span class=\"num-id\">"+d.num_id+"</span>&nbsp;";
+                  // str+="<span class=\"num-id\">"+encodeId(d.num_id, 'U')+"</span>&nbsp;";
+                  str+="<a href=\""+http+"/interact/zhibo/page/room/u/"+encodeId(d.num_id, 'U')+"\" target=\"_blank\">encodeId 白H5</a> &nbsp;";
+                  str+="<a href=\""+http+"/interact/userlive/get/room/u/"+d.encode_id+"\" target=\"_blank\">PC</a>&nbsp;";
+                  str+="<a href=\""+http+"/interact/zhibo/page/room/u/"+d.encode_id+"\" target=\"_blank\">白H5</a><br>";
+      }
+      $(".video-list p").append(str);
 
    }
 );
