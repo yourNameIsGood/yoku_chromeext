@@ -19,7 +19,7 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
       $(".debug-btn").on("click",function(){
             var current_url = (tabs[0].url);
             console.log(current_url);
-            current_url += "&debug=f53bafd8c2b602abca59e4c2850d8";
+            current_url += "&debug=f53bafd8c2ba59e4c2850d8";
             console.log(current_url);
             window.location.href = current_url;
             window.open(current_url);
