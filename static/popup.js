@@ -34,7 +34,7 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
                   {'list_name':'投票','num_id':'207242262',"encode_id":'XODI4OTY5MDQ4'},
       ];
 
-      var http = "http://linzhen.youku.com";
+      var http = "http://xiaoming.youku.com";
       var str = "";
       for(var i in list_data){
             // console.log(list_data[i]);
