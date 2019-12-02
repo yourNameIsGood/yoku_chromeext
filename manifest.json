@@ -1,26 +1,25 @@
 {
   "manifest_version": 2,
 
-  "name": "VUid",
-  "description": "Gettin' uid or vid from Youku.",
+  "name": "NXG Data Graph",
+  "description": "Get to know Data Graph Better",
   "version": "1.0",
 
   "browser_action": {
-    "default_icon": "static/power.png",
+    "default_icon": "static/icon.png",
     "default_popup": "popup.html"
   },
-  // "background":{
-  //       "persistent": false,
-  //       "scripts":["/static/background.js"]
-  //   },
-  // "background_page":"background.html",
   "content_scripts": [
     {
       "matches":["*://*/*"],
       "js": ["/static/jquery.min.js","/static/content_script.js"]
     }
   ],
-  "permissions": [ "tabs","activeTab" ]
+  "permissions": [ 
+        "cookies",
+        "tabs",
+        "activeTab",
+        "http://*/*",
+        "https://*/*"
+  ]
 }
-
-
