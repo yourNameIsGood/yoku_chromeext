@@ -24,7 +24,7 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
         // init switch btn context
         let target = {
             "url": current_url,
-            "name": "xdebugrpc"
+            "name": debugname
         } 
         chrome.cookies.get(target, function(c){
             if(c !== null && c !== "undefined"){
