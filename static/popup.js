@@ -19,12 +19,16 @@ function extractDomain(url) {
 chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
     function(tabs){
         var debugname = "xdebugrpc"
-        console.log('init', 'tabs[0] is', tabs[0])
+        var debugnamev2 = "_xdebugrpc"
         var current_url = (tabs[0].url);
         // init switch btn context
         let target = {
             "url": current_url,
             "name": debugname
+        }
+        let targetv2 = {
+            "url": current_url,
+            "name": debugnamev2
         } 
         chrome.cookies.get(target, function(c){
             if(c !== null && c !== "undefined"){
@@ -71,6 +75,8 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
                 $(".result").html(res)
             })
         }) 
+
+        // auto-decition-making-switch-on-off-cookie
         $(".debug-btn").on("click",function(){
             var current_url = (tabs[0].url);
             var domain = extractDomain(current_url)
@@ -88,18 +94,38 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
                             $(".result").html(res)
                             $(".debug-btn").val("ADD debug")
                         })
+                        let targetv2 = {
+                            "url": current_url,
+                            "name": debugnamev2
+                        } 
+                        chrome.cookies.remove(targetv2,function(c){
+                            var res = 'Done removing debug'
+                            $(".result").html(res)
+                            $(".debug-btn").val("ADD debug")
+                        }) 
                     }else{
                         let target = {
                             "url": current_url,
                             "domain": domain,
                             "name": debugname,
-                            "value": "cprgubedx"
-                        } 
+                            "value": debugname.split("").reverse().join("")
+                        }
                         chrome.cookies.set(target,function(c){
                             var res = "Done adding debug"
                             $(".result").html(res)
                             $(".debug-btn").val("DEL debug")
                         })
+                        let targetv2 = {
+                            "url": current_url,
+                            "domain": domain,
+                            "name": debugnamev2,
+                            "value": debugnamev2.split("").reverse().join("")
+                        } 
+                        chrome.cookies.set(targetv2,function(c){
+                            var res = "Done adding debug"
+                            $(".result").html(res)
+                            $(".debug-btn").val("DEL debug")
+                        }) 
                     }
                 }
             )
