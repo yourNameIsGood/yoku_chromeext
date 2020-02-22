@@ -18,18 +18,13 @@ function extractDomain(url) {
 }
 chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
     function(tabs){
-        var debugname = "xdebugrpc"
-        var debugnamev2 = "_xdebugrpc"
+        var debugname = "_xdebugrpc"
         var current_url = (tabs[0].url);
         // init switch btn context
         let target = {
             "url": current_url,
             "name": debugname
         }
-        let targetv2 = {
-            "url": current_url,
-            "name": debugnamev2
-        } 
         chrome.cookies.get(target, function(c){
             if(c !== null && c !== "undefined"){
                 $(".debug-btn").val("DEL debug")
@@ -94,15 +89,7 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
                             $(".result").html(res)
                             $(".debug-btn").val("ADD debug")
                         })
-                        let targetv2 = {
-                            "url": current_url,
-                            "name": debugnamev2
-                        } 
-                        chrome.cookies.remove(targetv2,function(c){
-                            var res = 'Done removing debug'
-                            $(".result").html(res)
-                            $(".debug-btn").val("ADD debug")
-                        }) 
+                         
                     }else{
                         let target = {
                             "url": current_url,
@@ -115,17 +102,6 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
                             $(".result").html(res)
                             $(".debug-btn").val("DEL debug")
                         })
-                        let targetv2 = {
-                            "url": current_url,
-                            "domain": domain,
-                            "name": debugnamev2,
-                            "value": debugnamev2.split("").reverse().join("")
-                        } 
-                        chrome.cookies.set(targetv2,function(c){
-                            var res = "Done adding debug"
-                            $(".result").html(res)
-                            $(".debug-btn").val("DEL debug")
-                        }) 
                     }
                 }
             )
