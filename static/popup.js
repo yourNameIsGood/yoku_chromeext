@@ -27,9 +27,9 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
         }
         chrome.cookies.get(target, function(c){
             if(c !== null && c !== "undefined"){
-                $(".debug-btn").val("DEL debug")
+                $(".debug-btn").val("DEL debug cookie") .addClass("btn-stop") .removeClass("btn-start")
             }else{
-                $(".debug-btn").val("ADD debug")
+                $(".debug-btn").val("ADD debug cookie") .addClass("btn-start") .removeClass("btn-stop")
             }
         })
         $(".mannual-btn-add").on("click", function(){
@@ -87,9 +87,8 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
                         chrome.cookies.remove(target,function(c){
                             var res = 'Done removing debug'
                             $(".result").html(res)
-                            $(".debug-btn").val("ADD debug")
+                            $(".debug-btn").val("ADD debug cookie") .addClass("btn-start") .removeClass("btn-stop")
                         })
-                         
                     }else{
                         let target = {
                             "url": current_url,
@@ -100,7 +99,7 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
                         chrome.cookies.set(target,function(c){
                             var res = "Done adding debug"
                             $(".result").html(res)
-                            $(".debug-btn").val("DEL debug")
+                            $(".debug-btn").val("DEL debug cookie") .addClass("btn-stop") .removeClass("btn-start")
                         })
                     }
                 }
