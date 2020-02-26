@@ -16,6 +16,13 @@ function extractDomain(url) {
     }
     return domain;
 }
+function set_btn_to(stats){
+    if(stats == "start"){
+        $(".debug-btn").val("Start debug") .addClass("btn-start") .removeClass("btn-stop")
+    }else{
+        $(".debug-btn").val("Stop debug") .addClass("btn-stop") .removeClass("btn-start")
+    }
+}
 chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT},
     function(tabs){
         var debugname = "_xdebugrpc"
@@ -27,9 +34,9 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
         }
         chrome.cookies.get(target, function(c){
             if(c !== null && c !== "undefined"){
-                $(".debug-btn").val("DEL debug cookie") .addClass("btn-stop") .removeClass("btn-start")
+                set_btn_to("stop")
             }else{
-                $(".debug-btn").val("ADD debug cookie") .addClass("btn-start") .removeClass("btn-stop")
+                set_btn_to("start")
             }
         })
         $(".mannual-btn-add").on("click", function(){
@@ -87,7 +94,7 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
                         chrome.cookies.remove(target,function(c){
                             var res = 'Done removing debug'
                             $(".result").html(res)
-                            $(".debug-btn").val("ADD debug cookie") .addClass("btn-start") .removeClass("btn-stop")
+                            set_btn_to("start")
                         })
                     }else{
                         let target = {
@@ -99,7 +106,7 @@ chrome.tabs.query({'active': true, 'windowId': chrome.windows.WINDOW_ID_CURRENT}
                         chrome.cookies.set(target,function(c){
                             var res = "Done adding debug"
                             $(".result").html(res)
-                            $(".debug-btn").val("DEL debug cookie") .addClass("btn-stop") .removeClass("btn-start")
+                            set_btn_to("stop")
                         })
                     }
                 }
