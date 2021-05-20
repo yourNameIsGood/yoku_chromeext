@@ -12,6 +12,7 @@
   "content_scripts": [
     {
       "matches":["*://*/*"],
+      "run_at":"document_end",
       "js": ["/static/jquery.min.js","/static/content_script.js"]
     }
   ],
